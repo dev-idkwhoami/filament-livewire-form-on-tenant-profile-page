@@ -23,7 +23,7 @@ php artisan migrate --seed
 
 ### What is the problem ?
 
-The class [EditTenantProfile](vendor%2Ffilament%2Ffilament%2Fsrc%2FPages%2FTenancy%2FEditTenantProfile.php) seems to be broken no matter if using inside a plugin or outside.
+The class [EditTenantProfile](vendor/filament/filament/src/Pages/Tenancy/EditTenantProfile.php) seems to be broken no matter if using inside a plugin or outside.
 
 Unsure why this is happening but when "submitting" a form on the tenant profile page it attempts to render a component that does not exist.
 
