@@ -53,11 +53,11 @@ Here are the examples and how to replicate the problem:
 
     - Navigate to `$APP_URL/nonplugin/new` login if not already done.
     
-    ![nonplugin_tenant_register.png](.github/Fimages/Fnonplugin_tenant_register.png)
+    ![nonplugin_tenant_register.png](.github/images/nonplugin_tenant_register.png)
 
     - Click on `Non Plugin Register` and an error will be thrown. 
 
-    ![nonplugin_tenant_register_error.png](.github/Fimages/Fnonplugin_tenant_register_error.png)
+    ![nonplugin_tenant_register_error.png](.github/images/nonplugin_tenant_register_error.png)
 
 ### Expected Behavior
 
