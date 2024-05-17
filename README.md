@@ -1,3 +1,44 @@
+### Possible Fix ?
+
+In Livewire [ComponentRegistry.php](vendor%2Flivewire%2Flivewire%2Fsrc%2FMechanisms%2FComponentRegistry.php) the function nameToClass
+
+```php
+protected function nameToClass($name)
+    {
+        // Check the aliases...
+        if (isset($this->aliases[$name])) {
+            if (is_object($this->aliases[$name])) return $this->aliases[$name]::class;
+
+            return $this->aliases[$name];
+        }
+
+        // Hash check the non-aliased classes...
+        foreach ($this->nonAliasedClasses as $class) {
+            if (crc32($class) === $name) {
+                return $class;
+            }
+        }
+        $generatedClass = $this->generateClassFromName($name);
+
+        /*
+         * This prevents submission issues on Filament Tenant Pages.
+         * No idea why ?
+         * Maybe the page component is not registered correctly hence why livewire cant find the proper class and adds the App\Livewire\ at the front
+         * 
+         * Although this doesn't fix the issue itself its just the reason for the error.
+         * The source has top be somewhere higher up the chain.
+         * */
+        if(str_starts_with($generatedClass, "\App\Livewire\App\Filament\Pages")) {
+            $generatedClass = str_replace("\App\Livewire\App", 'App', $generatedClass);
+        }
+
+        // Reverse generate a class from a name...
+        return $generatedClass;
+    }
+```
+
+
+
 ### How was the project created ?
 
 ```shell

@@ -3,7 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\NonPluginEditTenantProfile;
-use App\Filament\Pages\NonPluginRegisterTenant;
+use App\Filament\Pages\RegisterTenant;
 use DevIdkwhoami\PanelPlugin\Models\Tenant;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -33,7 +33,7 @@ class NonpluginPanelProvider extends PanelProvider
             ])
             ->tenant(Tenant::class)
             ->tenantProfile(NonPluginEditTenantProfile::class)
-            ->tenantRegistration(NonPluginRegisterTenant::class)
+            ->tenantRegistration(RegisterTenant::class)
             ->discoverResources(in: app_path('Filament/Nonplugin/Resources'), for: 'App\\Filament\\Nonplugin\\Resources')
             ->discoverPages(in: app_path('Filament/Nonplugin/Pages'), for: 'App\\Filament\\Nonplugin\\Pages')
             ->pages([

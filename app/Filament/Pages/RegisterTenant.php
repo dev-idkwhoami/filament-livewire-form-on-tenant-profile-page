@@ -2,12 +2,13 @@
 
 namespace App\Filament\Pages;
 
+use DevIdkwhoami\PanelPlugin\Models\Tenant;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Pages\Tenancy\RegisterTenant;
+use Filament\Pages\Tenancy\RegisterTenant as BaseRegisterTenant;
 use Illuminate\Database\Eloquent\Model;
 
-class NonPluginRegisterTenant extends RegisterTenant
+class RegisterTenant extends BaseRegisterTenant
 {
     public static function getLabel(): string
     {
@@ -32,6 +33,9 @@ class NonPluginRegisterTenant extends RegisterTenant
 
     protected function handleRegistration(array $data): Model
     {
-        dd($data);
+        return Tenant::create([
+            'name' => $data['string'],
+            'owner_id' => auth()->user()->id,
+        ]);
     }
 }
