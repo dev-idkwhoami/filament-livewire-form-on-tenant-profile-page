@@ -1,0 +1,29 @@
+{
+    "name": "dev-idkwhoami/panel-plugin",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.1.0",
+    "autoload": {
+        "psr-4": {
+            "DevIdkwhoami\\PanelPlugin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DevIdkwhoami\\PanelPlugin\\PanelPluginServiceProvider",
+                "DevIdkwhoami\\PanelPlugin\\Providers\\AdminPanelProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Maximilian Oswald",
+            "email": "maxi.osw@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "filament/support": "v3.2.80"
+    }
+}
