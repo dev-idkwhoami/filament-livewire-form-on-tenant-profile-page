@@ -3,6 +3,7 @@
 namespace DevIdkwhoami\PanelPlugin\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DevIdkwhoami\PanelPlugin\Factories\UserFactory;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,11 @@ use Illuminate\Support\Collection;
 class User extends Authenticatable implements HasTenants
 {
     use HasFactory, Notifiable;
+
+    protected static function newFactory()
+    {
+        return new UserFactory();
+    }
 
     protected $fillable = [
         'name',

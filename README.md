@@ -1,6 +1,6 @@
 ### Possible Fix ?
 
-In Livewire [ComponentRegistry.php](vendor%2Flivewire%2Flivewire%2Fsrc%2FMechanisms%2FComponentRegistry.php) the function nameToClass
+In Livewire [ComponentRegistry.php](vendor/livewire/livewire/src/Mechanisms/ComponentRegistry.php) the function `nameToClass`
 
 ```php
 protected function nameToClass($name)
@@ -37,6 +37,38 @@ protected function nameToClass($name)
     }
 ```
 
+So i found the actual source of the problem. As i tought the components are not being registered at all actually.
+
+In FilamentPHP [HasComponents.php](vendor/filament/filament/src/Panel/Concerns/HasComponents.php) the function `registerLivewireComponents`
+
+```php
+.
+.
+.
+
+    // This works and was there already
+    if ($this->hasLogin() && is_subclass_of($loginRouteAction = $this->getLoginRouteAction(), Component::class)) {
+        $this->queueLivewireComponentForRegistration($loginRouteAction);
+    }
+
+    /*
+     * The following three checks / registrations are missing right now. Seems so few people actually use this feature that nobody noticed you can't actually use it the intended way ^^
+     * 
+     * I will be making a PR for these 6 lines. I dont think it will break anything but who knows ^^
+     * */
+    if ($this->hasTenantRegistration() && is_subclass_of($tenantRegistrationComponent = $this->getTenantRegistrationPage(), Component::class)) {
+        $this->queueLivewireComponentForRegistration($tenantRegistrationComponent);
+    }
+
+    if ($this->hasTenantProfile() && is_subclass_of($tenantProfileComponent = $this->getTenantProfilePage(), Component::class)) {
+        $this->queueLivewireComponentForRegistration($tenantProfileComponent);
+    }
+
+    if ($this->hasProfile() && is_subclass_of($profilePageComponent = $this->getProfilePage(), Component::class)) {
+        $this->queueLivewireComponentForRegistration($profilePageComponent);
+    }
+
+```
 
 
 ### How was the project created ?

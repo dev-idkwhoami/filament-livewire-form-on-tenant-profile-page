@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $tenant = Tenant::create([
-           'name' => 'Test Tenant',
-           'owner_id' => $user->id
+            'name' => 'Test Tenant',
+            'owner_id' => $user->id,
         ]);
 
         $user->tenants()->attach($tenant);

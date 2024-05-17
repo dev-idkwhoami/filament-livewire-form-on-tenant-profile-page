@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant as BaseRegisterTenant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class RegisterTenant extends BaseRegisterTenant
 {
@@ -22,7 +23,7 @@ class RegisterTenant extends BaseRegisterTenant
             ->statePath('data')
             ->schema([
                 TextInput::make('string')
-                    ->default('abcdefghijklmnop')
+                    ->default(Str::random())
                     ->label('NonPlugin String'),
                 TextInput::make('number')
                     ->default('1234567890')
@@ -33,9 +34,13 @@ class RegisterTenant extends BaseRegisterTenant
 
     protected function handleRegistration(array $data): Model
     {
-        return Tenant::create([
+        $tenant = Tenant::create([
             'name' => $data['string'],
             'owner_id' => auth()->user()->id,
         ]);
+
+        auth()->user()->tenants()->attach($tenant);
+
+        return $tenant;
     }
 }

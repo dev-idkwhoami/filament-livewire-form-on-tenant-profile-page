@@ -2,9 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\CustomEditProfile;
 use App\Filament\Pages\NonPluginEditTenantProfile;
 use App\Filament\Pages\RegisterTenant;
 use DevIdkwhoami\PanelPlugin\Models\Tenant;
+use DevIdkwhoami\PanelPlugin\Pages\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -31,9 +33,11 @@ class NonpluginPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->tenant(Tenant::class)
+            ->login(Login::class)
+            /*->tenant(Tenant::class)
             ->tenantProfile(NonPluginEditTenantProfile::class)
-            ->tenantRegistration(RegisterTenant::class)
+            ->tenantRegistration(RegisterTenant::class)*/
+            ->profile(CustomEditProfile::class)
             ->discoverResources(in: app_path('Filament/Nonplugin/Resources'), for: 'App\\Filament\\Nonplugin\\Resources')
             ->discoverPages(in: app_path('Filament/Nonplugin/Pages'), for: 'App\\Filament\\Nonplugin\\Pages')
             ->pages([
