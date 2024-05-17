@@ -49,14 +49,22 @@ Here are the examples and how to replicate the problem:
 
     ![plugin_tenant_profile_error.png](.github/images/plugin_tenant_profile_error.png)
 
-3. Plugin Normal Page
+3. Non Plugin Tenant Registration Page
 
-   - Navigate to `$APP_URL/admin` login if not already done. In the sidebar navigation click on `Test Page`
+    - Navigate to `$APP_URL/nonplugin/new` login if not already done.
+    
+    ![nonplugin_tenant_register.png](.github/Fimages/Fnonplugin_tenant_register.png)
+
+    - Click on `Non Plugin Register` and an error will be thrown. 
+
+    ![nonplugin_tenant_register_error.png](.github/Fimages/Fnonplugin_tenant_register_error.png)
+
+### Expected Behavior
+
+- Navigate to `$APP_URL/admin` login if not already done. In the sidebar navigation click on `Test Page`
 
     ![plugin_test_page.png](.github/images/plugin_test_page.png)
 
-   - Now click on `Save changes` and **NO** error will be thrown. But instead the `save()` function is called and the `$data` array is dumped.
-   
-    ![plugin_test_page_dump.png](.github/images/plugin_test_page_dump.png)
+- Now click on `Save changes` and **NO** error will be thrown. But instead the `save()` function is called and the `$data` array is dumped.
 
-    
+    ![plugin_test_page_dump.png](.github/images/plugin_test_page_dump.png)
